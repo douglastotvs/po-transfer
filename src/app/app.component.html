@@ -20,22 +20,27 @@
     </po-step>
       <po-step p-label="Confirmação" [p-can-active-next-step]="poAccept.bind(this)">
         <po-list-view
-          p-property-title="name"
-          [p-items]="[
-            { name: 'Registro 1', email: 'register@po-ui.com' },
-            { name: 'Registro 2', email: 'register2@po-ui.com' }
-          ]"
-        >
+          p-property-title="name" [p-actions]="actions" [p-items]="transactionConfirm" >
   <ng-template p-list-view-content-template let-item>
     <div class="po-row">
-      <po-info class="po-md-12" p-label="Email" [p-value]="item.email"></po-info>
+      <po-info class="po-md-4" p-label="Remetente" [p-value]="item.sender"></po-info>
+      <po-info class="po-md-4" p-label="Destinátario" [p-value]="item.recipient"></po-info>
+      <po-info class="po-md-4" p-label="Valor" [p-value]="item.money"></po-info>
     </div>
   </ng-template>
 
 </po-list-view>
       </po-step >
       <po-step p-label="Concluído"[p-can-active-next-step]="poConcluded.bind(this)" >
-        <po-container>estamos em concluído</po-container>
+        <po-container>
+          <img class="po-page-blocked-user-image po-mt-5" src="../assets/Success.png" alt="Confirmacao">
+
+          <div class="po-row">
+            <p class="po-font-title po-text-center po-md-12 po-mb-2">Transferência</p>
+            <p class="po-font-text po-text-center po-md-12 po-mb-5" >Concluída com sucesso</p>
+          </div>
+
+        </po-container>
       </po-step>
     </po-stepper>
 
