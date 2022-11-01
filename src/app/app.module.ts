@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PoStepperModule } from '@po-ui/ng-components';
 import { PoListViewModule } from '@po-ui/ng-components';
 import { PoContainerModule } from '@po-ui/ng-components';
+import { PoLoadingModule } from '@po-ui/ng-components';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { PoContainerModule } from '@po-ui/ng-components';
     PoStepperModule,
     PoListViewModule,
     PoContainerModule,
-
+    PoLoadingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
