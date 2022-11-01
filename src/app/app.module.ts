@@ -8,6 +8,9 @@ import { RouterModule } from '@angular/router';
 import { PoDynamicModule } from '@po-ui/ng-components';
 import { PoButtonModule } from '@po-ui/ng-components';
 import { HttpClientModule } from '@angular/common/http';
+import { PoStepperModule } from '@po-ui/ng-components';
+import { PoListViewModule } from '@po-ui/ng-components';
+import { PoContainerModule } from '@po-ui/ng-components';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,11 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule.forRoot([]),
     PoDynamicModule,
     PoButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    PoStepperModule,
+    PoListViewModule,
+    PoContainerModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

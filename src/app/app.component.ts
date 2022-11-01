@@ -20,6 +20,10 @@ export class AppComponent {
   raw!: any;
   API = environment.API;
 
+  propertyData: boolean = false;
+  propertyAccept: boolean = false;
+  propertyConcluded: boolean = false;
+
   constructor(private http: HttpClient){
 
   }
@@ -66,10 +70,22 @@ export class AppComponent {
     this.http.post(this.API, this.raw).subscribe(() => {
       alert("Incluido com sucesso " )
     })
-  }
+  };
 
   getForm(form: NgForm) {
     this.dynamicForm = form;
-  }
+  };
+
+  poData(){
+    return this.propertyData;
+  };
+
+  poAccept(){
+    return this.propertyAccept;
+  };
+
+  poConcluded(){
+    return this.propertyConcluded;
+  };
 
 }

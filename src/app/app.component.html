@@ -5,15 +5,40 @@
 
   <po-page-default p-title="Hello Word">
 
-    <po-dynamic-form #dynamicForm (p-form)="getForm($event)" [p-fields]="propertyForm">
-    </po-dynamic-form>
+    <po-stepper #stepper [p-step-icons]="true" >
+      <po-step p-label="Transferência" [p-can-active-next-step]="poData.bind(this)">
+      <po-dynamic-form #dynamicForm (p-form)="getForm($event)" [p-fields]="propertyForm">
+      </po-dynamic-form>
 
-    <po-button
-    [p-disabled]="dynamicForm.form.invalid || false"
-    p-label="Salvar"
-    class="po-md-3"
-    (p-click)="save()">
-    </po-button>
+      <po-button
+      [p-disabled]="dynamicForm.form.invalid || false"
+      p-label="Salvar"
+      class="po-md-3"
+      (p-click)="save()">
+      </po-button>
 
-  </po-page-default>
+    </po-step>
+      <po-step p-label="Confirmação" [p-can-active-next-step]="poAccept.bind(this)">
+        <po-list-view
+          p-property-title="name"
+          [p-items]="[
+            { name: 'Registro 1', email: 'register@po-ui.com' },
+            { name: 'Registro 2', email: 'register2@po-ui.com' }
+          ]"
+        >
+  <ng-template p-list-view-content-template let-item>
+    <div class="po-row">
+      <po-info class="po-md-12" p-label="Email" [p-value]="item.email"></po-info>
+    </div>
+  </ng-template>
+
+</po-list-view>
+      </po-step >
+      <po-step p-label="Concluído"[p-can-active-next-step]="poConcluded.bind(this)" >
+        <po-container>estamos em concluído</po-container>
+      </po-step>
+    </po-stepper>
+
+</po-page-default>
+
 </div>
