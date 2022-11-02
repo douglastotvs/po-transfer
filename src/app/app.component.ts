@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { PoDynamicFormField, PoListViewAction, PoMenuItem, PoStepComponent, PoStepperComponent } from '@po-ui/ng-components';
+import { PoDynamicFormField, PoGaugeRanges, PoListViewAction, PoMenuItem, PoStepComponent, PoStepperComponent } from '@po-ui/ng-components';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -26,10 +26,18 @@ export class AppComponent {
   propertyData: boolean = false;
   propertyAccept: boolean = false;
   propertyConcluded: boolean = false;
+  poGaugeAll: number = 0;
+  poGaugeDay: number = 0;
 
   constructor(private http: HttpClient){
 
   }
+
+  turnoverRanges: Array<PoGaugeRanges> = [
+    { from: 0, to: 50, label: 'Baixo', color: '#00b28e' },
+    { from: 50, to: 75, label: 'Médio', color: '#ea9b3e' },
+    { from: 75, to: 100, label: 'Alto', color: '#c64840' }
+  ];
 
   readonly actions: Array<PoListViewAction> = [
     {

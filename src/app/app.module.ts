@@ -12,6 +12,8 @@ import { PoStepperModule } from '@po-ui/ng-components';
 import { PoListViewModule } from '@po-ui/ng-components';
 import { PoContainerModule } from '@po-ui/ng-components';
 import { PoLoadingModule } from '@po-ui/ng-components';
+import { PoWidgetModule } from '@po-ui/ng-components';
+import { PoGaugeModule } from '@po-ui/ng-components';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { PoLoadingModule } from '@po-ui/ng-components';
     PoListViewModule,
     PoContainerModule,
     PoLoadingModule,
+    PoWidgetModule,
+    PoGaugeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
