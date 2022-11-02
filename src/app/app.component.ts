@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { PoDynamicFormField, PoGaugeRanges, PoListViewAction, PoMenuItem, PoStepComponent, PoStepperComponent } from '@po-ui/ng-components';
+import { PoMenuItemsService } from '@po-ui/ng-components/lib/components/po-menu/services/po-menu-items.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -10,7 +11,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   @ViewChild('stepper') stepper!: PoStepperComponent;
   readonly menus: Array<PoMenuItem> = [
@@ -31,6 +32,9 @@ export class AppComponent {
 
   constructor(private http: HttpClient){
 
+  }
+  ngOnInit(): void {
+   this.updatePoGauge();
   }
 
   turnoverRanges: Array<PoGaugeRanges> = [
@@ -87,6 +91,15 @@ export class AppComponent {
   ];
 
   save(){
+
+    if(this.poGaugeDay >= 100 ){
+      alert('Limite diário atigindo');
+      return
+    } else if (this.poGaugeAll >= 100 ) {
+      alert('Limite total atigindo');
+      return
+    }
+
     this.transactionConfirm = []
     this.raw = this.dynamicForm.form.getRawValue();
     this.raw = {
@@ -123,6 +136,7 @@ export class AppComponent {
   confirm(){
 
     this.isHideLoading = false;
+    this.updatePoGauge()
     setTimeout(() => {
 
       this.propertyAccept = true;
@@ -131,7 +145,11 @@ export class AppComponent {
       this.dynamicForm.reset();
 
       this.isHideLoading = true
-    },2000)
+    },2000);
+
+    setTimeout(() => {
+      this.stepper.first();
+    }, 4000);
 
   }
 
@@ -139,6 +157,21 @@ export class AppComponent {
     this.stepper.first();
   }
 
+  updatePoGauge(){
+    this.http.get(this.API).subscribe((items: any) => {
+      this.poGaugeAll = 10* items.length;
 
+      const today = new Date().toLocaleDateString();
+      let count = 0;
 
+      items.map((reponse: any) => {
+        const dateToCompare = new Date(reponse.date).toLocaleDateString();
+
+        if(today === dateToCompare ) {
+          count  ++;
+        }
+    })
+    this.poGaugeDay = 10* count;
+  })
+}
 }
